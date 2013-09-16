@@ -63,7 +63,7 @@ if($_POST["edit"] == 'Save'){
 		$line = rtrim($line);
 		if($line == $_POST["line"]){
 			$feed = explode("\t", $line);
-			echo exec("/opt/mmpc/mmpc_oldfilestoadd.pl $feed[1]");
+			echo exec("/opt/mpc/mpc_oldfilestoadd.pl $feed[1]");
 		}
 	}
 } elseif($_POST["editconfig"] == 'Save'){
@@ -83,7 +83,7 @@ if($_POST["toolbar"] == 'Last Run Log'){
 } elseif($_POST["toolbar"] == 'Old Files to add'){
 	ListFile($cOldFileslogtoadd);
 } elseif($_POST["toolbar"] == 'Read Me'){
-	ListFile('/opt/mmpc/README');
+	ListFile('/opt/mpc/README');
 } elseif($_POST["toolbar"] == 'Add Feed'){
 	EditFeed();
 	ListFeeds();
@@ -224,7 +224,7 @@ function FillUrl(){
 	echo '<input type=hidden name="line" value="'. $_POST["line"].'" />';
 	echo "<tr><th>Feed Name </th><td><input size='100%' type=text name=editfeedname value='$wName' /></td></tr>";
 	echo "<tr><th>Feed URL  </th><td><input size='100%' type=text id=editfeedurl name=editfeedurl  value='$wUrl'  /></td></tr>";
-/*	echo "<tr><th>or        </th><td> </td></tr>";
+	echo "<tr><th>or        </th><td> </td></tr>";
 	echo "<tr><th>Feed Type </th><td>
 					<SELECT id=urltype name=urltype>
 						<OPTION>Youtube User Uploads</OPTION>
@@ -232,7 +232,7 @@ function FillUrl(){
 					</SELECT>
 					<input size='70%' type=text id='editfeedtext' name='editfeedtext' />
 					<BUTTON type=button ONCLICK=\"FillUrl()\">^</button>
-				</td></tr>";*/
+				</td></tr>";
 	echo "<tr><th>User Name </th><td><input size='100%' type=text name=editfeeduser value='$wUser' /></td></tr>";
 	echo "<tr><th>Password  </th><td><input size='100%' type=text name=editfeedpass value='$wPass' /></td></tr>";
 	echo "<tr><td></td><td><input type=submit name=edit value='$Type'/></td></tr>";
