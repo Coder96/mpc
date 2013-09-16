@@ -346,11 +346,16 @@ sub YouTubedownload{
 	writeDebugLog("Description:$fDescription");
 	$fLocalFileName = $fTitle;
 	$fLocalFileName =~ s/\s/_/gi;
-	$fLocalFileName =~ tr|"'\\/%||d;
+	$fLocalFileName =~ s/&amp;/and/gi;
+	$fLocalFileName =~ tr|"'\\/%&:;||d;
 	$fLocalFileName = $fLocalFileName . '.%(ext)s';
 	writeDebugLog("Youtube Filename:$fLocalFileName");
 	
-	my $command = ("$youtubedlPath --no-part -vo '$DowloadDir/$fLocalFileName' '$fLink' >$workdir/$cDownloadFile");
+	my $command = ("$youtubedlPath --no-part -vo '$DowloadDir/$feedName/$fLocalFileName' '$fLink' >$workdir/$cDownloadFile");
+	
+	if(! -d "$DowloadDir/$feedName"){
+		mkdir("$DowloadDir/$feedName");
+	} 
 	writeDebugLog("$command");
 	my $cLog = qx($command);
 	writeDebugLog("Youtube:$cLog");
@@ -411,9 +416,24 @@ sub wgetdownload{
 		$fLocalFileName = substr($fLocalFileName, ++$fpos1);
 	}
 	$fLocalFileName =~ s/\s/_/gi;
-	$fLocalFileName =~ tr|"'\\/%||d;
+	$fLocalFileName =~ s/&amp;/and/gi;
+	$fLocalFileName =~ tr|"'\\/%&:;||d;
 	
-	my $command = ("$wgetPath -v --output-document='$DowloadDir/$fLocalFileName' --output-file=$workdir/$cDownloadFile '$fLink'");
+	if(length($fLocalFileName)<15){
+		$fpos1 = rindex($fLocalFileName, '.');
+		if($fpos1 > -1){
+			$fTitle =~ s/\s/_/gi;
+			$fTitle =~ s/&amp;/and/gi;
+			$fTitle =~ tr|"'\\/%&:;||d;
+			$fLocalFileName = $fTitle . substr($fLocalFileName, $fpos1);
+		}
+	}
+	
+	my $command = ("$wgetPath -v --output-document='$DowloadDir/$feedName/$fLocalFileName' --output-file=$workdir/$cDownloadFile '$fLink'");
+	writeDebugLog("$DowloadDir/$feedName");
+	if(! -d "$DowloadDir/$feedName"){
+		mkdir("$DowloadDir/$feedName");
+	} 
 	writeDebugLog("$command");
 	my $cLog = qx($command);
 	$cLog = trim($cLog);
