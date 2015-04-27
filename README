@@ -9,11 +9,13 @@ external programs needed
   curl in the path
 
  Tested
-  youtume.com 2012-10-15
-  vimeo.com 2012-10-15
-  blip.tv 2012-10-17
-  Regular rss 2012-10-19
-  justin.tv 2012-10-26 This api works http://api.justin.tv/api/channel/archives/<userid>.xml?limit=10
+  youtume.com 	2012-10-15
+  vimeo.com 		2012-10-15
+  blip.tv 			2012-10-17
+  Regular rss 	2012-10-19
+  justin.tv 		2012-10-26 This api works http://api.justin.tv/api/channel/archives/<userid>.xml?limit=10
+  pbs						2015-04-27
+  youtube.com		2015-04-27 new rss request format channel_id and user
 
 Userid and password not implimented yet.
   

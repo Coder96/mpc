@@ -228,19 +228,18 @@ FEED: foreach $feed (@feeds){
 					if($line =~ m/Link:/){$fLink = $mvalue;}
 					if($line =~ m/Description:/){$fDescription = $mvalue;}
 				}
+#				if(length($fDescription)<10){
+#					next ITEM;
+#				}
 				# Skip item if we've already got it
 				chomp($fLink);
-				if(length($fDescription)<10){
-					next ITEM;
-				}
 				foreach my $item (@previouslyDownloaded){
 					next ITEM if $fLink eq $item;
 				}
 				YouTubedownload($fLink, $feedName, $fTitle, $fDescription);
 			}
 		}
-	}
-	elsif($DownloadType =~ 'wget'){
+	}	elsif($DownloadType =~ 'wget'){
 		my $cRecSS = '---------recordseperator--------';
 		my $cFldS  = 'FldS-----------';
 		my $cTitle = 'titl-----------';
@@ -330,7 +329,7 @@ sub DownladType{
 	if($feedUrl =~ /blip.tv/i){ $DownloadType = 'wget'; }
 	if($feedUrl =~ /escapistmagazine.com/i){ $DownloadType = 'youtube-dl'; }
 	if($feedUrl =~ /justin.tv/i){ $DownloadType = 'wget'; }
-#  if($feedUrl =~ //i){ $DownloadType = ''; }
+  if($feedUrl =~ /pbs.org/i){ $DownloadType = 'youtube-dl'; }
 #  if($feedUrl =~ //i){ $DownloadType = ''; }
 #  if($feedUrl =~ //i){ $DownloadType = ''; }
 #  if($feedUrl =~ //i){ $DownloadType = ''; }
