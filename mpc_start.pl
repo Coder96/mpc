@@ -224,9 +224,9 @@ FEED: foreach $feed (@feeds){
 				my ($fTitle, $fLink, $fDescription, $fLocalFileName) ='';
 				foreach $line (@feedlines){
 					($mkey, $mvalue) = split(/: /,$line, 2 );
-					if($line =~ m/Title:/){$fTitle = $mvalue;}
-					if($line =~ m/Link:/){$fLink = $mvalue;}
-					if($line =~ m/Description:/){$fDescription = $mvalue;}
+					if($mkey =~ m/Title/){$fTitle = $mvalue;}
+					if($mkey =~ m/Link/){$fLink = $mvalue;}
+#					if($line =~ m/Description:/){$fDescription = $mvalue;}
 				}
 #				if(length($fDescription)<10){
 #					next ITEM;
